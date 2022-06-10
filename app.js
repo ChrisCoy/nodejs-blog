@@ -13,6 +13,9 @@ require("./models/Postagem");
 const Postagem = mongoose.model("postagens");
 require("./models/Categoria");
 const Categoria = mongoose.model("categorias");
+const passport = require("passport");
+require("./config/auth")(passport);
+const url = require("url");
 
 //conexao ao BD
 mongoose.Promise = global.Promise;
@@ -45,12 +48,17 @@ app.use(
     saveUninitialized: true,
   })
 );
+
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(flash());
 
 //Middleware
 app.use((req, res, next) => {
   res.locals.success_msg = req.flash("success_msg");
   res.locals.error_msg = req.flash("error_msg");
+  res.locals.error = req.flash("error");
+  res.locals.user = req.user || null;
   next();
 });
 
@@ -137,5 +145,5 @@ app.get("/*", (req, res) => {
 });
 
 //Outros
-const PORT = 8081;
+const PORT = process.env.PORT || 8081;
 app.listen(PORT, () => console.log("IS ALIVE!!!!"));

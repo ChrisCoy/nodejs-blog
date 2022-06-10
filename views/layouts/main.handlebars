@@ -11,6 +11,10 @@
     {{>_navbar}}
     
     <div class="container mt-4">
+      {{#if error}}
+        <div class="alert alert-danger">{{error}}</div>
+      {{else}}
+      {{/if}}
       {{>_msg}}
       {{{body}}}
     </div>
@@ -25,4 +29,18 @@
     integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
     crossorigin="anonymous"
   ></script>
+  <script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
+  <script>(function($) {
+    $(document).ready(function() {
+      // get current URL path and assign 'active' class
+      var pathname = window.location.pathname;
+      console.log(pathname)
+      console.log($('.navbar-nav > li > a[href="'+pathname+'"]'))
+      $('.navbar-nav > li > a[href="'+pathname+'"]').addClass('active');
+  });
+  })(jQuery);
+</script>
 </html>

@@ -15,18 +15,26 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/">Home</a>
+          <a class="nav-link" aria-current="page" href="/">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/categorias">Categorias</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/usuarios/registro">Registro</a>
-        </li>
+        {{#if user}}
+          <li class="nav-item">
+            <a class="nav-link" href="/usuarios/logout">Logout</a>
+          </li>
+        {{else}}
+          <li class="nav-item">
+            <a class="nav-link" href="/usuarios/login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/usuarios/registro">Registro</a>
+          </li>
+        {{/if}}
       </ul>
+      <div class="d-flex text-light"><i class="bi bi-person-circle mt-1"></i>
+        {{user.nome}}</div>
     </div>
   </div>
 </nav>
