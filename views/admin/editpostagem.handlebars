@@ -1,0 +1,63 @@
+{{#each erros}}
+  <div class="alert alert-danger" id="msg">{{texto}}</div>
+  <script id="msg">setInterval(()=>{document.getElementById("msg")?.remove();},2500)</script>
+{{else}}
+{{/each}}
+<h3>Editar Postagem</h3>
+
+<div class="card">
+  <div class="card-body">
+    <h4>Nova postagem</h4>
+    <form action="/admin/postagens/edit" method="POST">
+      <input type="hidden" name="id" value="{{postagem._id}}" />
+      <label for="titulo">Titulo: </label>
+      <input
+        type="text"
+        name="titulo"
+        class="form-control"
+        value="{{postagem.titulo}}"
+        required
+      />
+      <label for="slug">Slug: </label>
+      <input type="text" name="slug" class="form-control" value="{{postagem.slug}}" required />
+      <label for="descricao">Descrição:</label>
+      <input
+        type="text"
+        name="descricao"
+        class="form-control"
+        value="{{postagem.descricao}}"
+        required
+      />
+
+      <label for="conteudo">Conteudo</label>
+      <textarea name="conteudo" class="form-control" required>{{postagem.conteudo}}</textarea>
+      <label for="categoria">Categoria:</label>
+
+      <div class="input-group">
+        <select
+          id="select-input"
+          name="categoria"
+          style="width: 100%; padding: 8px; border-radius: 5px; border-color: #ced4da;"
+        >
+          {{#each categorias}}
+            <option value="{{_id}}">{{nome}}</option>
+          {{else}}
+            <option value="0">Nenhuma categoria</option>
+          {{/each}}
+        </select>
+
+      </div>
+      <br />
+      <button type="submit" class="btn btn-success mt-2">Editar postagem</button>
+    </form>
+  </div>
+</div>
+{{! prettier-ignore }}
+<script>
+  var options = document.getElementById("select-input");
+  for (let i = 0; i < options?.length; i++){
+    if (options[i].value == "{{postagem.categoria._id}}"){
+      options[i].selected = true;
+    }
+  }
+</script>

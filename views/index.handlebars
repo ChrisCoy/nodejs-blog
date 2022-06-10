@@ -1,0 +1,29 @@
+<h2>Pagina de posts</h2>
+<div class="jumbotron bg-light p-4">
+  <h1 class="display-4">Bem vindo ao Blog do Coy</h1>
+  <p class="lead">Um blog maravilhoso onde você vai encontrar um monte de poha nenhuma.</p>
+  <hr class="my-4" />
+  <p>Tudo que você precisa em nenhum lugar, crie uma conta hoje mesmo para ter acesso a nada.</p>
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="#" role="button">Crie uma conta</a>
+  </p>
+</div>
+
+<hr />
+
+<h2>Postagens Recentes</h2>
+
+{{#each postagens}}
+  <div class="card p-4 mt-4">
+    <div class="card-borad">
+      <h3>{{titulo}}</h3>
+      <p>{{descricao}}</p>
+      <a href="/postagem/{{slug}}"><button class="btn btn-success">Leia mais</button></a>
+      <hr />
+      <small>Categoria: {{categoria.nome}}</small><br />
+      <small>Data de publicação: {{date}}</small>
+    </div>
+  </div>
+{{else}}
+  <h5>Nenhuma postagem.</h5>
+{{/each}}
